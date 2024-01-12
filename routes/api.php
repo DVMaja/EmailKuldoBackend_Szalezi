@@ -4,6 +4,7 @@ use App\Http\Controllers\MailSenderController;
 use App\Http\Controllers\MajorController;
 use App\Http\Controllers\Sent_letterController;
 use App\Http\Controllers\StudentController;
+use App\Http\Controllers\StudentMailController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -51,4 +52,7 @@ Route::put('/sent_letters/{id}', [Sent_letterController::class, 'update']);
 Route::delete('/sent_letters{id}', [Sent_letterController::class, 'destroy']);
 
 //User
+
+//Email küldéshez kellő útvonalak
+Route::get('send_mail', [StudentMailController::class, 'index']);
 
