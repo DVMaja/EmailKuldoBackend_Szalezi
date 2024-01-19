@@ -53,6 +53,3 @@ Route::delete('/sent_letters{id}', [Sent_letterController::class, 'destroy']);
 
 //User
 
-//Email küldéshez kellő útvonalak
-Route::get('send_mail', [StudentMailController::class, 'index']);
-

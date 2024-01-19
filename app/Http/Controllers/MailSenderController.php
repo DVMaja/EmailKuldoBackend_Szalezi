@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\MailSender;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 class MailSenderController extends Controller
 {
@@ -39,4 +41,21 @@ class MailSenderController extends Controller
         $mailSender->path = $request->path;
         $mailSender->save();
     }
+
+    public function mailSenderJsonba()
+    {
+        $mailSenderData = DB::table('mail_senders as m')
+            ->join('students as s', 'm.student_id', '=', 's.student_id')
+            ->select('m.student_id', 'm.pdf_name', 'm.path', 's.email', 's.nev')
+            ->get();
+
+       /*  $timestamp = now()->format('Y-m-d_H-i');
+        $jsonFileName = 'studentEmailData_' . $timestamp . '.json';
+
+        $jsonContent = json_encode($mailSenderData);
+        Storage::put('/jsonTarolo/' . $jsonFileName, $jsonContent); */
+        return $mailSenderData;
+    }
+
+    
 }

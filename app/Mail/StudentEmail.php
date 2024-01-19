@@ -5,9 +5,12 @@ namespace App\Mail;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
+use Illuminate\Mail\Mailables\Attachment;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
+
+use function PHPSTORM_META\map;
 
 class StudentEmail extends Mailable
 {
@@ -28,7 +31,7 @@ class StudentEmail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Student Email',            
+            subject: 'Student Email',
         );
     }
 
@@ -50,6 +53,15 @@ class StudentEmail extends Mailable
      */
     public function attachments(): array
     {
-        return [];
+        $mappaPath = $this->mailData['path'];
+        $pdfName = $this->mailData['pdf_name'];
+        //print('storage/' . $mappaPath . '/' . $pdfName);
+        //print($pdfName);
+        //echo asset('storage/kuldendoFajlok/Jövedelemkifizetési lap - Diák Második (00525) 20231108_0829030.pdf');
+
+        return [
+            Attachment::fromPath('storage/' . $mappaPath . '/' . $pdfName)
+                ->withMime('application/pdf'),
+        ];
     }
 }

@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\StudentMailController;
+use App\Mail\StudentEmail;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,3 +19,6 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+//Email küldéshez kellő útvonalak
+Route::get('api/send_mail', [StudentMailController::class, 'index']);
+Route::get('api/email_pdfel', [StudentMailController::class, 'emailPdfel']);
