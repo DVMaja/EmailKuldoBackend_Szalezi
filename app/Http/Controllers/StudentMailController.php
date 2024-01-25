@@ -38,7 +38,7 @@ class StudentMailController extends Controller
                     'name' => $email->nev,
                     'email' => $email->email,
                     'pdf_name' => $email->pdf_name,
-                    'path' => $email->path, //"public/mappa"
+                    'path' => 'storage/kuldendoFajlok' //$email->path, //'storage/kuldendoFajlok'
 
                 ];
                 //print($mailData[$db]);

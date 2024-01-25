@@ -54,18 +54,18 @@ class StudentController extends Controller
 
     //Lekérdezések
 
-    public function studentDatas()
+    /* public function studentDatas()
     {
         return DB::table('students')
             ->select('student_id', 'email', 'nev')
             ->get();
-    }
+    } */
 
     public function studentDatasJsonba()
     {
         $students = DB::table('students as s')
-            ->join('pdf_paths as p', 's.student_id', '=', 'p.student_id')
-            ->select('s.student_id', 's.email', 's.nev', 'p.path')
+            ->join('mail_senders as ms', 's.student_id', '=', 'ms.student_id')
+            ->select('s.student_id', 's.email', 's.nev', 'ms.pdf_name') //, 'p.path'
             ->get();
 
         $timestamp = now()->format('Y-m-d_H-i');

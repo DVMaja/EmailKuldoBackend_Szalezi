@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('student_id');
             $table->string('pdf_name');
-            $table->string('path');
+            //$table->string('path');
             $table->timestamps();
             $table->foreign('student_id')->references('student_id')->on('students');
         });

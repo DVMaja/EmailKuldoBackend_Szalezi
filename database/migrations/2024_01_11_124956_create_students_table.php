@@ -13,14 +13,14 @@ return new class extends Migration
     {
         Schema::create('students', function (Blueprint $table) {
             $table->string('student_id')->unique();
-            $table->integer('adoszam')->unique();
+            $table->integer('adoszam')->nullable()->default(null);//->unique();
             $table->integer('tajszam')->nullable()->default(null);
             $table->string('email'); //->unique() amíg tesztelés van
             $table->string('nev');
             $table->string('szul_nev')->nullable()->default(null);
             $table->string('anyja_neve')->nullable()->default(null);
             $table->integer('okt_azon')->nullable()->default(null);
-            $table->foreignId('major_id')->references('major_id')->on('majors');
+            $table->foreignId('major_id')->references('major_id')->on('majors')->nullable()->default(null);
             $table->primary(['student_id']);//, 'adoszam'
             $table->timestamps();
         });
