@@ -54,13 +54,13 @@ class StudentEmail extends Mailable
     public function attachments(): array
     {
         $mappaPath = $this->mailData['path'];
-        $pdfName = $this->mailData['pdf_name'];
+        $pdfName = $this->mailData['pdf_name']; //'valami';//
         //print('storage/' . $mappaPath . '/' . $pdfName);
         //print($pdfName);
         //echo asset('storage/kuldendoFajlok/Jövedelemkifizetési lap - Diák Második (00525) 20231108_0829030.pdf');
 
         return [
-            Attachment::fromPath($mappaPath . '/' . $pdfName)
+            Attachment::fromPath($mappaPath . '/' . $pdfName . '.pdf')
                 ->withMime('application/pdf'),
         ];
     }
