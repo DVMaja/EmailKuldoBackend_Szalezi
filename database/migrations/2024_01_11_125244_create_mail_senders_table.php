@@ -12,12 +12,15 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('mail_senders', function (Blueprint $table) {
-            $table->id();
+            //$table->id();
             $table->string('student_id');
+            $table->string('nev');
+            $table->string('email');            
             $table->string('pdf_name');
             //$table->string('path');
             $table->timestamps();
-            $table->foreign('student_id')->references('student_id')->on('students');
+            $table->primary(['student_id']);
+            //$table->foreign('student_id')->references('student_id')->on('students');
         });
     }
 
