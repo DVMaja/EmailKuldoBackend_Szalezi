@@ -22,6 +22,12 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+//Json file készítése
+//
+Route::get('mail_data_jsonbe', [StudentMailController::class, 'mailDatasJsonba']);
+Route::get('data_jsonbe', [StudentController::class, 'studentDatasJsonba']);
+
+
 
 //Major
 Route::get('/majors', [MajorController::class, 'index']);
@@ -52,4 +58,3 @@ Route::put('/sent_letters/{id}', [Sent_letterController::class, 'update']);
 Route::delete('/sent_letters{id}', [Sent_letterController::class, 'destroy']);
 
 //User
-

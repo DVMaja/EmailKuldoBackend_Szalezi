@@ -56,7 +56,7 @@ class StudentEmail extends Mailable
         $mappaPath = $this->mailData['path'];
         $pdfName = $this->mailData['pdf_name'];
         //print('storage/' . $mappaPath . '/' . $pdfName);
-        //print($pdfName);
+        //print($mappaPath . '/' . $pdfName);
         //echo asset('storage/kuldendoFajlok/Jövedelemkifizetési lap - Diák Második (00525) 20231108_0829030.pdf');
 
         return [

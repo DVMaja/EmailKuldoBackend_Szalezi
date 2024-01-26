@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Mail;
 use App\Mail\DemoMail;
 use App\Mail\StudentEmail;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 class StudentMailController extends Controller
 {
@@ -26,10 +27,11 @@ class StudentMailController extends Controller
     public function emailPdfel()
     {
         //$jsonFilePath = $mappa;//kuldestSegito -> itt lesz a json file ami a kiküldéshez kell
-        $jsonFilePath = storage_path('app/kuldestSegito/studentEmailData_2023-12-08_08-46.json');
+        $jsonFilePath = storage_path('app/jsonScriptek/studentEmailData_2024-01-26_15-54.json');
 
         if (file_exists($jsonFilePath)) {
             $jsonContent = file_get_contents($jsonFilePath);
+
             $emails = json_decode($jsonContent);
             $db = 0;
             foreach ($emails as $email) {
@@ -37,12 +39,12 @@ class StudentMailController extends Controller
                     'student_id' => $email->student_id,
                     'name' => $email->nev,
                     'email' => $email->email,
-                    'pdf_name' => $email->pdf_name,
+                    'pdf_name' => $email->pdf_name . '.pdf',
                     'path' => 'storage/kuldendoFajlok' //$email->path, //'storage/kuldendoFajlok'
 
                 ];
-                //print($mailData[$db]);
-                //print($details['path']);
+                //print($mailData['name']);
+                //toth.laszlo@akkszalezi.hu
                 Mail::to($email->email)->send(new StudentEmail($mailData)); //, $pdfAdatok
 
                 $db += 1;
@@ -51,5 +53,21 @@ class StudentMailController extends Controller
         } else {
             dd("JSON file not found");
         }
+    }
+
+    public function mailDatasJsonba()
+    {
+        $students = DB::table('mail_senders')
+            ->select('student_id', 'nev', 'email', 'pdf_name') //, 'p.path'
+            ->get();
+
+        //print($students);
+        $timestamp = now()->format('Y-m-d_H-i');
+        $jsonFileName = 'studentEmailData_' . $timestamp . '.json';
+
+        $jsonContent = json_encode($students);
+        Storage::put('/jsonScriptek/' . $jsonFileName, $jsonContent);
+
+        return $students;
     }
 }
