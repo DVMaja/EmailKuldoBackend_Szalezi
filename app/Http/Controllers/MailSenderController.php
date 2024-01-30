@@ -27,18 +27,18 @@ class MailSenderController extends Controller
     public function update(Request $request, $id)
     {
         $mailSender = MailSender::find($id);
-        $mailSender->student_id = $request->student_id;
+        $mailSender->nev = $request->nev;
         $mailSender->pdf_name = $request->pdf_name;
-        $mailSender->path = $request->path;
+        $mailSender->email = $request->email;
         $mailSender->save();
     }
 
     public function store(Request $request)
     {
         $mailSender = new MailSender();
-        $mailSender->student_id = $request->student_id;
+        $mailSender->nev = $request->nev;
         $mailSender->pdf_name = $request->pdf_name;
-        $mailSender->path = $request->path;
+        $mailSender->email = $request->email;
         $mailSender->save();
     }
 
