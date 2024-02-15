@@ -3,7 +3,8 @@ class DataService {
         axios.defaults.baseURL = "http://192.168.168.158:8000/";//mindig az aktuális laravel futási cím jön ide 
         //**Pl http://localhost:8000 ha localhostot alkalmazunk
          /*http://192.168.168.158:8000/   ha saját IP címről futtatod.
-         FONTOS a cors.php ba engedélyezni kell!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!*/
+         FONTOS a cors.php ba engedélyezni kell!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+         FONTOS ha a student táblában nincs a feltöltendő adatnak megfelelő párja akkor nem működik*/
     }
 
     getAxiosData(url, callback) {
