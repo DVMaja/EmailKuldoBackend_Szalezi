@@ -25,6 +25,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 //Json file készítése
 Route::get('mail_data_jsonbe', [StudentMailController::class, 'mailDatasJsonba']);
 Route::get('data_jsonbe', [StudentController::class, 'studentDatasJsonba']);
+//studentDataToDatabase
+Route::get('student_data_to_database', [StudentController::class, 'studentDataToDatabase']);
 
 //Major
 Route::get('/majors', [MajorController::class, 'index']);

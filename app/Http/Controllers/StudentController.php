@@ -6,6 +6,7 @@ use App\Models\Student;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\LazyCollection;
 
 class StudentController extends Controller
 {
@@ -75,5 +76,43 @@ class StudentController extends Controller
         Storage::put('/jsonScriptek/' . $jsonFileName, $jsonContent);
 
         return $students;
+    }
+
+    public function studentDataToDatabase()
+    {
+        try {
+            $handle = fopen(public_path("mailDatas.csv"), 'r');
+            if (!$handle) {
+                throw new \Exception("Failed to open the CSV file.");
+            }
+
+            $lineNumber = 0;
+
+            while (($line = fgetcsv($handle, 4096)) !== false) {
+                $lineNumber++;
+                if ($lineNumber === 1) {
+                    continue; // Skip header row
+                }
+
+                if (count($line) < 3) {
+                    // Log or handle invalid row
+                    continue;
+                }
+
+                $student = new Student();
+                $student->student_id = $line[1];
+                $student->email = $line[2];
+                $student->nev = $line[0];
+                // You can set other attributes here if needed
+                $student->save();
+            }
+
+            fclose($handle);
+
+            return response()->json(['message' => 'Data inserted successfully'], 200);
+        } catch (\Exception $e) {
+            // Log error or handle exception
+            return response()->json(['error' => $e->getMessage()], 500);
+        }
     }
 }

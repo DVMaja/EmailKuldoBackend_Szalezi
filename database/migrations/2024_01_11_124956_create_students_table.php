@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('szul_nev')->nullable()->default(null);
             $table->string('anyja_neve')->nullable()->default(null);
             $table->integer('okt_azon')->nullable()->default(null);
-            $table->foreignId('major_id')->references('major_id')->on('majors')->nullable()->default(null);
+            //$table->foreignId('major_id')->references('major_id')->on('majors')->nullable()->default(null);
             $table->primary(['student_id']);//, 'adoszam'
             $table->timestamps();
         });

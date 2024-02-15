@@ -58,18 +58,17 @@ class StudentMailController extends Controller
     }
 
     public function mailDatasJsonba()
-{
-    $students = DB::table('mail_senders')
-        ->select('student_id', 'nev', 'email', 'pdf_name') //, 'p.path'
-        ->get();
+    {
+        $students = DB::table('mail_senders')
+            ->select('kod', 'nev', 'email', 'fajlNev') //, 'p.path'
+            ->get();
 
-    $timestamp = now()->format('Y-m-d_H-i');
-    $jsonFileName = 'mailSenderData_' . $timestamp . '.json';
+        $timestamp = now()->format('Y-m-d_H-i');
+        $jsonFileName = 'mailSenderData_' . $timestamp . '.json';
 
-    $jsonContent = json_encode($students, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
-    Storage::put('/jsonScriptek/' . $jsonFileName, $jsonContent);
+        $jsonContent = json_encode($students, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
+        Storage::put('/jsonScriptek/' . $jsonFileName, $jsonContent);
 
-    return $students;
-}
-
+        return $students;
+    }
 }
