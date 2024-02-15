@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\MailSenderController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\StudentMailController;
 use App\Mail\StudentEmail;
@@ -18,11 +19,12 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('index');
 });
 //Email küldéshez kellő útvonalak
 Route::get('api/send_mail', [StudentMailController::class, 'index']);
 Route::get('api/email_pdfel', [StudentMailController::class, 'emailPdfel']);
 //api/pdfdata   ->diak kód, pdf neve, 
+Route::post('/', [MailSenderController::class, 'store']);
 //
 Route::get('api/data_jsonbe', [StudentController::class, 'studentDatasJsonba']);

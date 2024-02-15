@@ -11,6 +11,6 @@ class MailSender extends Model
     protected $fillable = [
         'student_id',
         'pdf_name',
-        'path'
+        //'path'
     ];
 }

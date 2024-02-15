@@ -29,17 +29,20 @@ class MailSenderController extends Controller
         $mailSender = MailSender::find($id);
         $mailSender->student_id = $request->student_id;
         $mailSender->pdf_name = $request->pdf_name;
-        $mailSender->path = $request->path;
+        //$mailSender->path = $request->path;
         $mailSender->save();
     }
 
     public function store(Request $request)
     {
+       // dd($request -> fajlNev);
         $mailSender = new MailSender();
-        $mailSender->student_id = $request->student_id;
-        $mailSender->pdf_name = $request->pdf_name;
-        $mailSender->path = $request->path;
+        $mailSender->student_id = $request->kod;
+        //$mailSender->student_id = 00522;
+        $mailSender->pdf_name = $request->fajlNev;
+        //$mailSender->path = $request->path;
         $mailSender->save();
+        //return MailSender::find($mailSender->student_id);
     }
 
     public function mailSenderJsonba()
