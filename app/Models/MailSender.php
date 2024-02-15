@@ -9,8 +9,8 @@ class MailSender extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'student_id',
-        'pdf_name',
-        'path'
+        'kod',
+        'fajlNev',
+        //'path'
     ];
 }

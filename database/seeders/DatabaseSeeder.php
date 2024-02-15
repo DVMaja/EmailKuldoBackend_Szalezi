@@ -18,5 +18,18 @@ class DatabaseSeeder extends Seeder
         //     'name' => 'Test User',
         //     'email' => 'test@example.com',
         // ]);
+
+        /**
+         * student_id
+         * adoszam
+         * tajszam
+         * email
+         * nev
+         * szul_nev
+         * anyja_neve
+         * okt_azon
+         * major_id
+         */
+        
     }
 }
