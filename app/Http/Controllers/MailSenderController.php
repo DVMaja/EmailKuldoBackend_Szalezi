@@ -27,22 +27,19 @@ class MailSenderController extends Controller
     public function update(Request $request, $id)
     {
         $mailSender = MailSender::find($id);
-        $mailSender->student_id = $request->student_id;
-        $mailSender->pdf_name = $request->pdf_name;
+        $mailSender->kod = $request->kod;
+        $mailSender->fajlNev = $request->fajlNev;
         //$mailSender->path = $request->path;
         $mailSender->save();
     }
 
     public function store(Request $request)
     {
-       // dd($request -> fajlNev);
+        // dd($request -> fajlNev);
         $mailSender = new MailSender();
-        $mailSender->student_id = $request->kod;
-        //$mailSender->student_id = 00522;
-        $mailSender->pdf_name = $request->fajlNev;
-        //$mailSender->path = $request->path;
+        $mailSender->kod = $request->kod;
+        $mailSender->fajlNev = $request->fajlNev;
         $mailSender->save();
-        //return MailSender::find($mailSender->student_id);
     }
 
     public function mailSenderJsonba()
@@ -52,13 +49,11 @@ class MailSenderController extends Controller
             ->select('m.student_id', 'm.pdf_name', 'm.path', 's.email', 's.nev')
             ->get();
 
-       /*  $timestamp = now()->format('Y-m-d_H-i');
+        /*  $timestamp = now()->format('Y-m-d_H-i');
         $jsonFileName = 'studentEmailData_' . $timestamp . '.json';
 
         $jsonContent = json_encode($mailSenderData);
         Storage::put('/jsonTarolo/' . $jsonFileName, $jsonContent); */
         return $mailSenderData;
     }
-
-    
 }

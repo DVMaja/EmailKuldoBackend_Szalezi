@@ -1,6 +1,9 @@
 class DataService {
     constructor() {
-        axios.defaults.baseURL = "http://localhost:8000/";
+        axios.defaults.baseURL = "http://192.168.168.158:8000/";//mindig az aktuális laravel futási cím jön ide 
+        //**Pl http://localhost:8000 ha localhostot alkalmazunk
+         /*http://192.168.168.158:8000/   ha saját IP címről futtatod.
+         FONTOS a cors.php ba engedélyezni kell!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!*/
     }
 
     getAxiosData(url, callback) {
@@ -41,25 +44,25 @@ class DataService {
 
     postAxiosData(url, data) {
         console.log("Életre kelt!");
-        axios 
-                .post(url, data)
-        /*({
-            method: 'post',
-            url: url,
-            data:{
-                student_id: data1,
-                pdf_name: data2
-            }
-        });*/
-                //.post(url, data)
-        //    .post(url, data1, data2)
+        axios
+            .post(url, data)
+            /*({
+                method: 'post',
+                url: url,
+                data:{
+                    student_id: data1,
+                    pdf_name: data2
+                }
+            });*/
+            //.post(url, data)
+            //    .post(url, data1, data2)
             /*
                 .post(url, {
                     student_id : data1,
                     pdf_name: data2,
                 })
 */
-        
+
             .then((response) => {
                 console.log("RESP", response);
                 console.log(response.status);
@@ -67,7 +70,7 @@ class DataService {
             .catch((error) => {
                 console.log("hiba", error);
             });
-        
+
     }
 
     putAxiosData(url, data) {

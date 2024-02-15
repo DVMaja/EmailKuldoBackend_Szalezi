@@ -13,11 +13,11 @@ return new class extends Migration
     {
         Schema::create('mail_senders', function (Blueprint $table) {
             $table->id();
-            $table->string('student_id');
-            $table->string('pdf_name')->nullable();
+            $table->string('kod');
+            $table->string('fajlNev')->nullable();
             //$table->string('path');
             $table->timestamps();
-            $table->foreign('student_id')->references('student_id')->on('students');
+            $table->foreign('kod')->references('student_id')->on('students');
         });
     }
 
