@@ -1,14 +1,16 @@
 <!DOCTYPE html>
 <html>
+
 <body>
-    <h1>Hey, {{ $mailData['name'] }},</h1>
+    <h1>Kedves {{ $mailData['name'] }},</h1>
     <br>
-    <p>Ez egy teszt email, SMPT segítsével. Mostmár formázva
-    <br>Automatizált üzenethez
-    </p>   
-    
-    <h3>Üdvözlettel</h3>
-    <h4>Automatikus Üzenet</h4>
+    <p>Csatoltan küldjük a bérlapját.
+        <br>További szép napot kívánunk!
+    </p>
+
+    <h3>Üdvözlettel:</h3>
+    <h4>Szalézi Ágazati Képzőközpont Nonprofit Kft. </h4>
+    <h4>Tanulmányi Osztály</h4>
 </body>
 
 </html>

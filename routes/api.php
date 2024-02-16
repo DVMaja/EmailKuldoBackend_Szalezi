@@ -23,8 +23,18 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 //Json file készítése
-Route::get('mail_data_jsonbe', [StudentMailController::class, 'mailDatasJsonba']);
+//Route::get('mail_data_jsonbe', [StudentMailController::class, 'mailDatasJsonba']);
+
+
+
+//Ez kell!
 Route::get('data_jsonbe', [StudentController::class, 'studentDatasJsonba']);
+
+//CSV fájl feltöltése
+Route::post('/upload_csv', [StudentController::class, 'uploadCsv']);
+
+
+
 
 //Major
 Route::get('/majors', [MajorController::class, 'index']);

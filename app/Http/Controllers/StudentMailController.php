@@ -27,7 +27,7 @@ class StudentMailController extends Controller
     public function emailPdfel()
     {
         //$jsonFilePath = $mappa;//kuldestSegito -> itt lesz a json file ami a kiküldéshez kell
-        $jsonFilePath = storage_path('app/jsonScriptek/mailSenderData_2024-01-26_19-52.json'); //
+        $jsonFilePath = storage_path('app/jsonScriptek/studentEmailData_2024-02-16_14-35.json'); //
         //mailSenderData_2024-01-26_18-56
         //studentEmailData_2024-01-26_15-54
 
@@ -40,7 +40,7 @@ class StudentMailController extends Controller
                     'student_id' => $email->student_id,
                     'name' => $email->nev,
                     'email' => $email->email,
-                    'pdf_name' => $email->pdf_name,
+                    'pdf_name' => $email->fajlNev,
                     'path' => 'storage/kuldendoFajlok' //$email->path, //'storage/kuldendoFajlok'
 
                 ];
@@ -60,7 +60,7 @@ class StudentMailController extends Controller
     public function mailDatasJsonba()
 {
     $students = DB::table('mail_senders')
-        ->select('student_id', 'nev', 'email', 'pdf_name') //, 'p.path'
+        ->select('kod', 'nev', 'email', 'pdf_name') //, 'p.path'
         ->get();
 
     $timestamp = now()->format('Y-m-d_H-i');

@@ -1,29 +1,34 @@
 import FajlNevek from "../View/FajlNevek.js";
 import DataService from "../Modell/DataService.js";
+import CsvFile from "../View/CsvFile.js";
 
 const ALAPVEGPONT = "api/mail_senders";
 class Controller {
     constructor() {
         const szuloElem = $("#tarolo")
         const FAJLNEVEK = new FajlNevek(szuloElem);
+        const CSVFORM = new CsvFile($("#csvFeltoltes"));
         this.dataService = new DataService();
         const tombom = FAJLNEVEK.getTomb();
         const gombElem = $("kuldgomb")
 
-        $(window).on("kuldes", (event) =>{
+        $(window).on("kuldes", (event) => {
             for (let index = 0; index < event.detail.length; index++) {
                 this.dataService.postAxiosData('/api/mail_senders', event.detail[index])
-                
+
             }
         })
 
+        $(window).on("csvFel", (event, csvData) => {
+            this.uploadCsvData(csvData);
+        })
 
         let index = 0;
-    
+
         function sendNextRequest() {
             if (index < tombom.length) {
                 console.log("while ciklus?");
-                this.dataService.postAxiosData("/mail_senders", {
+                this.dataService.postAxiosData("/api/mail_senders", {
                     student_id: this.detail[index].kod,
                     pdf_name: this.detail[index].fajlNev,
                 }).then(() => {
@@ -36,79 +41,34 @@ class Controller {
                 });
             }
         }
-    
-        sendNextRequest(); 
-        
 
-         
-/*
-        if (gombElem) {
-            $(window).on("kuldes", (event) =>{
-                console.log("Ifen belülbelépünk ide egyáltalán?")
-                this.dataService.postAxiosData("/mail_senders", {
-                    
-                    student_id : event.detail[i].kod,
-                    pdf_name: event.detail[i].fajlNev,
-                }); 
-            })    
-        } else {
-            console.log("Nincs kiválasztva fájl!")
-        }
-*/
+        sendNextRequest();
 
-    $(window).on("kuldes", (event) =>{
-        console.log("belépünk ide egyáltalán?")
-        console.log(event.detail);
-        //sendNextRequest(tombom, event.detail);
-    })
-
-
-/*
-        $(window).on("kuldes", () =>{
-            console.log("belépünk ide egyáltalán?")
-            for (let index = 0; index < tombom.length; index++) {
-                console.log(tombom[index])
-                console.log("belépünk ide egyáltalán?")
-                this.dataService.postAxiosData("/mail_senders", {
-                    
-                    student_id : this.detail[index].kod,
-                    pdf_name: this.detail[index].fajlNev,
-                }); 
-            }
-            /*
-            //console.log("küldés :)");
-            //console.log(event.detail);
-            //$("#tarolo").html(event.detail)
-
-            //this.dataService.getAxiosData("api/students", this.megjelenit);
-            this.dataService.postAxiosData("api/mail_senders", FAJLNEVEK.getTomb())
-           
-            for (let index = 0; index < event.detail.length; index++) {
-                //$("#fajlfeltoltes").append(event.detail[i].fajlNev, event.detail[i].kod);
-                let adatok = FAJLNEVEK.getTomb();
-                //this.dataService.postAxiosData("/mail_senders", adatok)
-                this.dataService.putAxiosData("/mail_senders", index, adatok)
-                console.log("For cikluson belül vagyunk")
-                this.dataService.postAxiosData("/mail_senders", {
-                    
-                    student_id : event.detail[i].kod,
-                    pdf_name: event.detail[i].fajlNev,
-                });            
-                
-            }
-            */
-            //this.dataService.getAxiosData("api/mail_senders", this.megjelenit);
-                
-
-        
-        
+        $(window).on("kuldes", (event) => {
+            //console.log("belépünk ide egyáltalán?")
+            console.log(event.detail);
+            //sendNextRequest(tombom, event.detail);
+        })
     }
-    
-    megjelenit(list){
+
+    uploadCsvData(csvData) {
+        this.dataService.uploadCsvData("/api/upload_csv", csvData)
+            .then(response => {
+                console.log(response.data.message);
+
+            })
+            .catch(error => {
+                console.error("Hiba a CSV fájl feltöltése közben:", error);
+            });
+    }
+
+
+    megjelenit(list) {
         console.log(list);
     }
 
     sendNextRequest(tombom, event) {
+        
         let index = 0;
         if (index < tombom.length) {
             console.log("while ciklus?");
@@ -125,6 +85,8 @@ class Controller {
             });
         }
     }
+
+
 
 }
 

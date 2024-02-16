@@ -6,6 +6,7 @@ use App\Models\Student;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\LazyCollection;
 
 class StudentController extends Controller
 {
@@ -61,11 +62,12 @@ class StudentController extends Controller
             ->get();
     } */
 
+    //Ez generálja a jsont
     public function studentDatasJsonba()
     {
         $students = DB::table('students as s')
-            ->join('mail_senders as ms', 's.student_id', '=', 'ms.student_id')
-            ->select('s.student_id', 's.email', 's.nev', 'ms.pdf_name') //, 'p.path'
+            ->join('mail_senders as ms', 's.student_id', '=', 'ms.kod')
+            ->select('s.student_id', 's.email', 's.nev', 'ms.fajlNev') //, 'p.path'
             ->get();
 
         $timestamp = now()->format('Y-m-d_H-i');
@@ -75,5 +77,96 @@ class StudentController extends Controller
         Storage::put('/jsonScriptek/' . $jsonFileName, $jsonContent);
 
         return $students;
+    }
+
+    public function uploadCsvRR(Request $request)
+    {
+
+        dd($request->all());
+
+        $request->validate([
+            'file' => 'required|mimes:csv,txt|max:10240',
+        ]);
+
+        if ($request->file('file')->isValid()) {
+            $file = $request->file('file');
+
+
+            $csvData = array_map('str_getcsv', file($file->path()));
+            $csvData = array_slice($csvData, 1); // Fejléc kihagyásaF
+            foreach ($csvData as $row) {
+                DB::table('students')->insert([
+                    'nev' => $row[0],
+                    'student_id' => $row[1],
+                    'email' => $row[2],
+                    'created_at' => now(),
+                    'updated_at' => now(),
+                ]);
+            }
+
+            return response()->json(['message' => 'CSV fájl sikeresen feltöltődött'], 200);
+        }
+
+        return response()->json(['message' => 'Nem érvényes CSV fájl'], 400);
+    }
+
+
+    /* public function uploadCsv1(Request $request)
+    {
+        $request->validate([
+            'file' => 'required|mimes:csv,txt|max:10240', // Max 10MB file size
+        ]);
+
+        if ($request->file('file')->isValid()) {
+            $file = $request->file('file');
+            $filePath = $file->getPathname();
+
+
+            $handle = fopen($filePath, 'r');
+            $header = fgetcsv($handle); //FEJLÉC LEVÉTELE
+            while (($row = fgetcsv($handle)) !== false) {
+                $data = array_combine($header, $row);
+                $student = new Student();
+                $student->student_id = $data['Bérlap kód'];
+                $student->email = $data['Email'];
+                $student->nev = $data['Név'];
+                $student->save();
+            }
+            fclose($handle);
+
+            return response()->json(['message' => 'CSV fájl sikeresen feltöltődött'], 200);
+        }
+
+        return response()->json(['message' => 'Nem érvényes CSV fájl'], 400);
+    }
+*/
+    public function uploadCsv(Request $request)
+    {
+        // Validate the uploaded file        
+        $request->validate([
+            'file' => 'required|mimes:csv,txt|max:10240', // Max 10MB file size
+        ]);
+
+        if ($request->file('file')->isValid()) {
+            $file = $request->file('file');
+            $filePath = $file->getPathname();
+
+            $csvData = array_map('str_getcsv', file($filePath));
+            $csvData = array_slice($csvData, 1);
+
+            foreach ($csvData as $row) {
+                DB::table('students')->insert([
+                    'student_id' => $row[0],
+                    'email' => $row[3],
+                    'nev' => $row[4],
+                    'created_at' => now(),
+                    'updated_at' => now(),
+                ]);
+            }
+
+            return response()->json(['message' => 'CSV fájl sikeresen feltöltődött'], 200);
+        }
+
+        return response()->json(['message' => 'Nem érvényes CSV fájl'], 400);
     }
 }
