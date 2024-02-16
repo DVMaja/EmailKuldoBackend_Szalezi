@@ -26,5 +26,8 @@ Route::get('/', function () {
 Route::get('api/email_pdfel', [StudentMailController::class, 'emailPdfel']);
 //api/pdfdata   ->diak kód, pdf neve, 
 Route::post('/', [MailSenderController::class, 'store']);
+
+//studentDataToDatabase
+//Route::get('api/student_data_to_database', [StudentController::class, 'studentDataToDatabase']);
 //
 //Route::get('api/data_jsonbe', [StudentController::class, 'studentDatasJsonba']);

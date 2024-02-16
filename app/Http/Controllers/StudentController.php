@@ -79,6 +79,7 @@ class StudentController extends Controller
         return $students;
     }
 
+
     public function uploadCsvRR(Request $request)
     {
 
@@ -167,6 +168,7 @@ class StudentController extends Controller
             return response()->json(['message' => 'CSV fájl sikeresen feltöltődött'], 200);
         }
 
-        return response()->json(['message' => 'Nem érvényes CSV fájl'], 400);
-    }
+        return response()->json(['message' => 'Nem érvényes CSV fájl'], 400);}
+
+    
 }

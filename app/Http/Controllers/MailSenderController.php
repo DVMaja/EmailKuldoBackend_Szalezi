@@ -34,7 +34,7 @@ class MailSenderController extends Controller
     }
 
     public function store(Request $request)
-    {        
+    {
         $mailSender = new MailSender();
         $mailSender->kod = $request->kod;
         $mailSender->fajlNev = $request->fajlNev;
@@ -44,8 +44,9 @@ class MailSenderController extends Controller
     public function mailSenderJsonba()
     {
         $mailSenderData = DB::table('mail_senders as m')
-            ->join('students as s', 'm.student_id', '=', 's.student_id')
-            ->select('m.kod', 'm.pdf_name', 'm.path', 's.email', 's.nev')
+
+            ->join('students as s', 'm.kod', '=', 's.kod')
+            ->select('m.kod', 'm.fajlNev', 's.email', 's.nev')
             ->get();
 
         /*  $timestamp = now()->format('Y-m-d_H-i');

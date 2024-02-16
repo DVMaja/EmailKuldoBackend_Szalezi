@@ -34,7 +34,6 @@ class MailSenderSeeder extends Seeder
                         "nev" => $row[0],
                         "student_id" => $row[1],
                         "email" => $row[2],
-                        //"pdf_name" => $row[3],
                     ];
                 })->toArray();
 

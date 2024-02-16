@@ -29,6 +29,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 //Ez kell!
 Route::get('data_jsonbe', [StudentController::class, 'studentDatasJsonba']);
+//studentDataToDatabase
+Route::get('student_data_to_database', [StudentController::class, 'studentDataToDatabase']);
 
 //CSV fájl feltöltése
 Route::post('/upload_csv', [StudentController::class, 'uploadCsv']);

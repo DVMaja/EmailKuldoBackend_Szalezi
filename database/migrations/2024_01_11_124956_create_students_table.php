@@ -9,6 +9,7 @@
         /*
      * Run the migrations.
      */
+
         public function up(): void
         {
             Schema::create('students', function (Blueprint $table) {
@@ -25,6 +26,7 @@
                 $table->timestamps();
             });
         }
+
 
         /**
          * Reverse the migrations.
