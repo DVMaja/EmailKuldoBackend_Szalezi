@@ -1,16 +1,15 @@
 class CsvFile {
     constructor(szuloElem) {
-        console.log("CsvFile");
+        //console.log("CsvFile");
         this.divElem = szuloElem;
         this.#megjelenit();
     }
 
     #megjelenit() {
         let txt = ` 
-        Itt kell majd kiválasztani melyik csv fájl kerüljön be az adatbázisba:        
+                
         <form id="uploadForm" enctype="multipart/form-data">
-        <input type="file" id="csvFile" name="file" accept=".csv">   
-                        
+            <input type="file" id="csvFile" name="file" accept=".csv">
             <button type="submit" id="csvFel">CSV feltöltése</button>
         </form>`;
         this.divElem.append(txt);
@@ -35,13 +34,15 @@ class CsvFile {
 
         reader.onload = () => {
             const csvData = reader.result;
-            const event = new CustomEvent("csvUploaded", { detail: csvData });
+            console.log(csvData); //Itt a baj
+            const event = new CustomEvent("csvFel", { detail: csvData });
             window.dispatchEvent(event);
         };
 
         reader.readAsText(file);
+        //console.log(reader.readAsText(file));
 
-        this.#esemenyTrigger(); // Trigger the "csvFel" event
+        // this.#esemenyTrigger(); // Trigger the "csvFel" event
     }
 
 

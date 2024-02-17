@@ -8,6 +8,7 @@ class DataService {
     }
 
     uploadCsvData(url, csvData) {
+        console.log("Hello");
         return axios.post(url, csvData);
     }
 

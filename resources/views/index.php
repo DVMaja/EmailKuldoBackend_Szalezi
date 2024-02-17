@@ -36,20 +36,12 @@
         <article>
             <div id="tarolo"></div>
             <div id="fajlfeltoltes">
-                Itt töltöm fel a fájlokat...
+                <p>Csatolandó fájlok elküldése:</p>
             </div>
-            <div id="fajlnevKiir">
-                Ide kerül a fájl neve....
+            <div id="csvFeltoltes">
+                <p>Diákok és adataik feltöltése:</p>
             </div>
 
-            <div id="csvFeltoltes">
-                
-            </div>
-            <!--
-            <div id="tablazatKiir">
-                Ide kerül a táblázat a több fájlnévvel...
-            </div>
-            -->
         </article>
         <footer>Minden jog fenntartva</footer>
     </main>

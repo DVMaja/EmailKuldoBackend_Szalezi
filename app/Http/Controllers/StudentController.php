@@ -83,7 +83,8 @@ class StudentController extends Controller
     public function uploadCsvRR(Request $request)
     {
 
-        dd($request->all());
+        echo ('Hello Backend');
+        //dd($request->all());
 
         $request->validate([
             'file' => 'required|mimes:csv,txt|max:10240',
@@ -168,7 +169,6 @@ class StudentController extends Controller
             return response()->json(['message' => 'CSV fájl sikeresen feltöltődött'], 200);
         }
 
-        return response()->json(['message' => 'Nem érvényes CSV fájl'], 400);}
-
-    
+        return response()->json(['message' => 'Nem érvényes CSV fájl'], 400);
+    }
 }
