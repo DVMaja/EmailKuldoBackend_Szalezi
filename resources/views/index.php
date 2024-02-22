@@ -38,9 +38,22 @@
             <div id="fajlfeltoltes">
                 <p>Csatolandó fájlok elküldése:</p>
             </div>
-            <div id="csvFeltoltes">
-                <p>Diákok és adataik feltöltése:</p>
+            <div id="buttons">
+                <button type="submit" id="jsonCreate">Json fájl elkészítése</button>
+
+                <button type="submit" id="emailSend">Email küldése</button>
+
             </div>
+            <div>
+                <p>Json fájl állapota: </p>
+                <p id="jsonAllapot"></p>
+                <p>Emailek állapota: </p>
+                <p id="emailAllapot"></p>
+            </div>
+
+            <!-- <div id="csvFeltoltes">
+                <p>Diákok és adataik feltöltése:</p>
+            </div> -->
 
         </article>
         <footer>Minden jog fenntartva</footer>

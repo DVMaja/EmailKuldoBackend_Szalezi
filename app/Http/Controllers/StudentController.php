@@ -71,7 +71,7 @@ class StudentController extends Controller
             ->get();
 
         $timestamp = now()->format('Y-m-d_H-i');
-        $jsonFileName = 'studentEmailData_' . $timestamp . '.json';
+        $jsonFileName = 'studentEmailData.json'; //'studentEmailData_' . $timestamp . '.json';
 
         $jsonContent = json_encode($students);
         Storage::put('/jsonScriptek/' . $jsonFileName, $jsonContent);

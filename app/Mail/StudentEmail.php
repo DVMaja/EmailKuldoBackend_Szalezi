@@ -32,7 +32,7 @@ class StudentEmail extends Mailable
     {
         return new Envelope(
             subject: 'Jövedelem igazolás',
-            
+
         );
     }
 

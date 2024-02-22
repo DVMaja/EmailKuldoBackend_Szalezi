@@ -9,10 +9,30 @@ class Controller {
         const FAJLNEVEK = new FajlNevek(szuloElem);
         const CSVFORM = new CsvFile($("#csvFeltoltes"));
         this.dataService = new DataService();
+        const JSONCREATE = $('#jsonCreate');
+        const EMAILSEND = $('#emailSend');
+        const jsonKi = $("jsonAllapot");
+
+        JSONCREATE.on('click', () => {
+            this.dataService.getAxiosData('data_jsonbe', (data) => {
+                console.log(data);
+                $("#jsonAllapot").append("Kész");
+            });
+
+        });
+
+        EMAILSEND.on('click', () => {
+            console.log("Click");
+            this.dataService.getAxiosData('email_pdfel', (data) => {
+                console.log(data);
+                $("#emailAllapot").append("Kész");
+            });
+        });
+
 
         $(window).on("kuldes", (event) => {
             for (let index = 0; index < event.detail.length; index++) {
-                this.dataService.postAxiosData('/api/mail_senders', event.detail[index])
+                this.dataService.postAxiosData('mail_senders', event.detail[index])
 
             }
         })
@@ -24,11 +44,9 @@ class Controller {
     }
 
     uploadCsvData(csvData) {
-        console.log("Hello2");
         this.dataService.uploadCsvData("/api/upload_csv", csvData)
 
             .then(response => {
-                console.log("Hello3");
                 console.log(response.data.message);
 
             })

@@ -27,7 +27,7 @@ class StudentMailController extends Controller
     public function emailPdfel()
     {
         //$jsonFilePath = $mappa;//kuldestSegito -> itt lesz a json file ami a kiküldéshez kell
-        $jsonFilePath = storage_path('app/jsonScriptek/studentEmailData_2024-02-16_14-35.json'); //
+        $jsonFilePath = storage_path('app/jsonScriptek/studentEmailData.json'); //
         //mailSenderData_2024-01-26_18-56
         //studentEmailData_2024-01-26_15-54
 
@@ -51,11 +51,13 @@ class StudentMailController extends Controller
 
                 $db += 1;
             }
-            dd("Emails elküldve: ");
+            //dd("Emails elküldve: ");
         } else {
-            dd("JSON file not found");
+            // dd("JSON file not found");
         }
     }
+
+
 
     public function mailDatasJsonba()
 

@@ -1,6 +1,6 @@
 class DataService {
     constructor() {
-        axios.defaults.baseURL = "http://192.168.168.158:8000/";//mindig az aktuális laravel futási cím jön ide 
+        axios.defaults.baseURL = "http://192.168.168.158:8000/api/";//mindig az aktuális laravel futási cím jön ide 
         //**Pl http://localhost:8000 ha localhostot alkalmazunk
         /*http://192.168.168.158:8000/   ha saját IP címről futtatod.
         FONTOS a cors.php ba engedélyezni kell!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -8,7 +8,6 @@ class DataService {
     }
 
     uploadCsvData(url, csvData) {
-        console.log("Hello");
         return axios.post(url, csvData);
     }
 
@@ -45,6 +44,7 @@ class DataService {
             .finally(function () {
                 // always executed
                 console.log("finally")
+                //$("#jsonAllapot").append("Kész");                
             });
     }
 

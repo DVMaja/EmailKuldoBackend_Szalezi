@@ -25,7 +25,7 @@ article {
     box-shadow: 10px 5px 5px rgb(38, 69, 73);
     border-radius: 10px;
     background-color: rgb(213, 248, 248);
-    height: 300px;
+    height: 350px;
 }
 
 #tarolo,
@@ -96,4 +96,7 @@ footer {
     touch-action: manipulation;
 
     cursor: pointer;
+}
+
+#buttons {
 }
