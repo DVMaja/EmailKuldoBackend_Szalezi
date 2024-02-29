@@ -32,7 +32,7 @@ class MailSenderSeeder extends Seeder
                     return [
 
                         "nev" => $row[0],
-                        "student_id" => "00" + $row[1],
+                        "student_id" => $row[1],
                         "email" => $row[2],
                     ];
                 })->toArray();
